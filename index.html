@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<title>ArkusPin - подбор комплектующих ПК</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ArkusPin</h1>
+            <div class="description">
+                Подбор комплектующих для ПК по типу подключения, цене и производителю
+            </div>
+        </div>
+    </header>
+
+<div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+    <div class="container">
+        <div class="filter-section window">
+            <div class="filter-header">
+                <h2 class="filter-title">Фильтры комплектующих</h2>
+                <div class="component-buttons">
+                    <button class="filter-button" data-component="gpu">Видеокарты</button>
+                    <button class="filter-button" data-component="cpu">Процессоры</button>
+                    <button class="filter-button" data-component="mb">Материнские платы</button>
+                    <button class="filter-button" data-component="psu">Блоки питания</button>
+                </div>
+            </div>
+
+            <div class="empty-filters">
+                <p>Выберите категорию комплектующих для отображения фильтров</p>
+            </div>
+
+            <!-- Фильтры для видеокарт -->
+            <div id="gpu-filters" class="subfilter">
+                <div class="filter-group">
+                    <div class="filter-group-title">Тип подключения:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-type="8+8">8+8 pin</button>
+                        <button class="option-button" data-type="8">8 pin</button>
+                        <button class="option-button" data-type="12vhpwp">12VHPWP</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-group-title">Производитель:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-brand="msi">MSI</button>
+                        <button class="option-button" data-brand="asus">ASUS</button>
+                        <button class="option-button" data-brand="gigabyte">Gigabyte</button>
+                        <button class="option-button" data-brand="palit">Palit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Фильтры для процессоров -->
+            <div id="cpu-filters" class="subfilter">
+                <div class="filter-group">
+                    <div class="filter-group-title">Сокет:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-socket="am5">AM5</button>
+                        <button class="option-button" data-socket="lga1700">LGA 1700</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Фильтры для материнских плат -->
+            <div id="mb-filters" class="subfilter">
+                <div class="filter-group">
+                    <div class="filter-group-title">Сокет:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-socket="am5">AM5</button>
+                        <button class="option-button" data-socket="lga1700">LGA 1700</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-group-title">Питание процессора:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-cpu-power="4+4">4+4 pin</button>
+                        <button class="option-button" data-cpu-power="8">8 pin</button>
+                        <button class="option-button" data-cpu-power="8+4">8+4 pin</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-group-title">Производитель:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-mb-brand="msi">MSI</button>
+                        <button class="option-button" data-mb-brand="asus">ASUS</button>
+                        <button class="option-button" data-mb-brand="gigabyte">Gigabyte</button>
+                        <button class="option-button" data-mb-brand="asrock">ASRock</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Фильтры для блоков питания -->
+            <div id="psu-filters" class="subfilter">
+                <div class="filter-group">
+                    <div class="filter-group-title">Тип подключения к видеокарте:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-connector="8+8">8+8 pin</button>
+                        <button class="option-button" data-connector="8">8 pin</button>
+                        <button class="option-button" data-connector="12vhpwp">12VHPWP</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-group-title">Мощность:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-wattage="600">600 Вт</button>
+                        <button class="option-button" data-wattage="750">750 Вт</button>
+                        <button class="option-button" data-wattage="850">850 Вт</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-group-title">Подключение процессора:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-cpu-connector="4+4">4+4 pin</button>
+                        <button class="option-button" data-cpu-connector="8">8 pin</button>
+                        <button class="option-button" data-cpu-connector="8+4">8+4 pin</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-group-title">Производитель:</div>
+                    <div class="filter-options">
+                        <button class="option-button" data-psu-brand="msi">MSI</button>
+                        <button class="option-button" data-psu-brand="asus">ASUS</button>
+                        <button class="option-button" data-psu-brand="corsair">Corsair</button>
+                        <button class="option-button" data-psu-brand="seasonic">Seasonic</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Инструкция -->
+        <div class="instructions window">
+            <h3>Как пользоваться сервисом:</h3>
+            <ol>
+                <li>Выберите категорию комплектующих в фильтрах</li>
+                <li>Примените нужные фильтры для поиска</li>
+                <li>Добавьте выбранные компоненты в сборку кнопкой "+"</li>
+                <li>Используйте строгий фильтр для автоматического подбора совместимых компонентов</li>
+            </ol>
+        </div>
+
+        <!-- Окно сборки -->
+        <div class="build-section window">
+            <div class="build-header">
+                <h2 class="build-title">
+                    <span>Ваша сборка</span>
+                    <button class="toggle-button">+</button>
+                </h2>
+                <div class="build-price">Итого: <span id="total-price">0</span> ₽</div>
+            </div>
+            <div class="build-content">
+                <div class="build-slots">
+                    <div class="build-slot">
+                        <span class="slot-label">Видеокарта</span>
+                        <div class="slot-content" id="gpu-slot">
+                            <div class="selected-product" style="display: none;">
+                                <div class="product-name"></div>
+                                <div class="product-price"></div>
+                                <button class="incompatibility-indicator">!</button>
+                                <button class="remove-button">×</button>
+                            </div>
+                            <div class="empty-slot">Не выбрано</div>
+                        </div>
+                    </div>
+                    <div class="build-slot">
+                        <span class="slot-label">Процессор</span>
+                        <div class="slot-content" id="cpu-slot">
+                            <div class="selected-product" style="display: none;">
+                                <div class="product-name"></div>
+                                <div class="product-price"></div>
+                                <button class="incompatibility-indicator">!</button>
+                                <button class="remove-button">×</button>
+                            </div>
+                            <div class="empty-slot">Не выбрано</div>
+                        </div>
+                    </div>
+                    <div class="build-slot">
+                        <span class="slot-label">Материнская плата</span>
+                        <div class="slot-content" id="mb-slot">
+                            <div class="selected-product" style="display: none;">
+                                <div class="product-name"></div>
+                                <div class="product-price"></div>
+                                <button class="incompatibility-indicator">!</button>
+                                <button class="remove-button">×</button>
+                            </div>
+                            <div class="empty-slot">Не выбрано</div>
+                        </div>
+                    </div>
+                    <div class="build-slot">
+                        <span class="slot-label">Блок питания</span>
+                        <div class="slot-content" id="psu-slot">
+                            <div class="selected-product" style="display: none;">
+                                <div class="product-name"></div>
+                                <div class="product-price"></div>
+                                <button class="incompatibility-indicator">!</button>
+                                <button class="remove-button">×</button>
+                            </div>
+                            <div class="empty-slot">Не выбрано</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="build-controls">
+                    <div class="strict-filter">
+                        <span class="strict-filter-label">Строгий фильтр</span>
+                        <label class="switch">
+                            <input type="checkbox" id="strict-filter-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="compatibility-check empty" id="compatibility-check">
+                        <!-- Текст будет заполняться динамически -->
+                    </div>
+
+                    <button class="delete-all-btn" id="delete-all-btn">Удалить все</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Примеры видеокарт -->
+        <div id="gpu-products" class="products-section window">
+            <div class="section-header">
+                <h2 class="section-title">Видеокарты</h2>
+            </div>
+            <div class="products-grid">
+                <!-- NVIDIA RTX 50 серия -->
+                <div class="product-card" data-type="8+8" data-brand="msi">
+                    <div class="product-name">MSI GeForce RTX 5060 Ti GAMING X</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8+8 pin</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                        <div class="spec-item">Память: 8GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 2310-2745 МГц</div>
+                    </div>
+                    <div class="product-price">54 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8+8" data-brand="asus">
+                    <div class="product-name">ASUS TUF GeForce RTX 5070 O12G GAMING</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8+8 pin</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                        <div class="spec-item">Память: 12GB GDDR6X</div>
+                        <div class="spec-item">Тактовая частота: 2205-2535 МГц</div>
+                    </div>
+                    <div class="product-price">79 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8+8" data-brand="gigabyte">
+                    <div class="product-name">Gigabyte GeForce RTX 5070 Ti EAGLE 16G</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8+8 pin</div>
+                        <div class="spec-item">Производитель: Gigabyte</div>
+                        <div class="spec-item">Память: 16GB GDDR6X</div>
+                        <div class="spec-item">Тактовая частота: 2310-2535 МГц</div>
+                    </div>
+                    <div class="product-price">89 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="12vhpwp" data-brand="msi">
+                    <div class="product-name">MSI GeForce RTX 5080 GAMING X TRIO 16G</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 12VHPWP</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                        <div class="spec-item">Память: 16GB GDDR6X</div>
+                        <div class="spec-item">Тактовая частота: 2235-2580 МГц</div>
+                    </div>
+                    <div class="product-price">129 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="12vhpwp" data-brand="asus">
+                    <div class="product-name">ASUS ROG Strix GeForce RTX 5090 OC Edition</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 12VHPWP</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                        <div class="spec-item">Память: 24GB GDDR6X</div>
+                        <div class="spec-item">Тактовая частота: 2235-2640 МГц</div>
+                    </div>
+                    <div class="product-price">229 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                
+                <!-- AMD RX серия -->
+                <div class="product-card" data-type="8" data-brand="msi">
+                    <div class="product-name">MSI Radeon RX 9070 GAMING X</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8 pin</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                        <div class="spec-item">Память: 12GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 2310-2535 МГц</div>
+                    </div>
+                    <div class="product-price">59 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8+8" data-brand="asus">
+                    <div class="product-name">ASUS TUF Radeon RX 9070 XT O16G GAMING</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8+8 pin</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                        <div class="spec-item">Память: 16GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 2205-2535 МГц</div>
+                    </div>
+                    <div class="product-price">74 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8+8" data-brand="gigabyte">
+                    <div class="product-name">Gigabyte Radeon RX 7900 XT GAMING OC 20G</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8+8 pin</div>
+                        <div class="spec-item">Производитель: Gigabyte</div>
+                        <div class="spec-item">Память: 20GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 2310-2535 МГц</div>
+                    </div>
+                    <div class="product-price">89 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8+8" data-brand="palit">
+                    <div class="product-name">Palit Radeon RX 7900 XTX GameRock 24G</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8+8 pin</div>
+                        <div class="spec-item">Производитель: Palit</div>
+                        <div class="spec-item">Память: 24GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 2235-2580 МГц</div>
+                    </div>
+                    <div class="product-price">109 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8" data-brand="msi">
+                    <div class="product-name">MSI Radeon RX 7800 XT GAMING X 16G</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8 pin</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                        <div class="spec-item">Память: 16GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 2235-2640 МГц</div>
+                    </div>
+                    <div class="product-price">69 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                
+                <!-- Другие видеокарты -->
+                <div class="product-card" data-type="8+8" data-brand="msi">
+                    <div class="product-name">MSI GeForce RTX 4070 Ti GAMING X TRIO</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8+8 pin</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                        <div class="spec-item">Память: 12GB GDDR6X</div>
+                        <div class="spec-item">Тактовая частота: 2310-2745 МГц</div>
+                    </div>
+                    <div class="product-price">84 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8" data-brand="gigabyte">
+                    <div class="product-name">Gigabyte GeForce RTX 4060 Ti EAGLE 8G</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8 pin</div>
+                        <div class="spec-item">Производитель: Gigabyte</div>
+                        <div class="spec-item">Память: 8GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 2310-2535 МГц</div>
+                    </div>
+                    <div class="product-price">43 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-type="8" data-brand="palit">
+                    <div class="product-name">Palit GeForce RTX 3060 DUAL 12GB</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение: 8 pin</div>
+                        <div class="spec-item">Производитель: Palit</div>
+                        <div class="spec-item">Память: 12GB GDDR6</div>
+                        <div class="spec-item">Тактовая частота: 1320-1777 МГц</div>
+                    </div>
+                    <div class="product-price">34 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Примеры процессоров -->
+        <div id="cpu-products" class="products-section window">
+            <div class="section-header">
+                <h2 class="section-title">Процессоры</h2>
+            </div>
+            <div class="products-grid">
+                <!-- AM5 процессоры -->
+                <div class="product-card" data-socket="am5">
+                    <div class="product-name">AMD Ryzen 5 7500F</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Ядра/потоки: 6/12</div>
+                        <div class="spec-item">Частота: 3.7-5.0 ГГц</div>
+                        <div class="spec-item">TDP: 65 Вт</div>
+                    </div>
+                    <div class="product-price">19 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="am5">
+                    <div class="product-name">AMD Ryzen 7 7700X</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Ядра/потоки: 8/16</div>
+                        <div class="spec-item">Частота: 4.5-5.4 ГГц</div>
+                        <div class="spec-item">TDP: 105 Вт</div>
+                    </div>
+                    <div class="product-price">32 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="am5">
+                    <div class="product-name">AMD Ryzen 9 9800X3D</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Ядра/потоки: 8/16</div>
+                        <div class="spec-item">Частота: 4.2-5.0 ГГц</div>
+                        <div class="spec-item">TDP: 120 Вт</div>
+                        <div class="spec-item">3D V-Cache: 96MB</div>
+                    </div>
+                    <div class="product-price">49 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="am5">
+                    <div class="product-name">AMD Ryzen 9 9950X</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Ядра/потоки: 16/32</div>
+                        <div class="spec-item">Частота: 4.3-5.7 ГГц</div>
+                        <div class="spec-item">TDP: 170 Вт</div>
+                    </div>
+                    <div class="product-price">64 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+
+                <!-- LGA 1700 процессоры -->
+                <div class="product-card" data-socket="lga1700">
+                    <div class="product-name">Intel Core i5-12400KF</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Ядра/потоки: 6/12</div>
+                        <div class="spec-item">Частота: 3.7-4.4 ГГц</div>
+                        <div class="spec-item">TDP: 125 Вт</div>
+                    </div>
+                    <div class="product-price">18 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="lga1700">
+                    <div class="product-name">Intel Core i7-14700KF</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Ядра/потоки: 20/28 (8P+12E)</div>
+                        <div class="spec-item">Частота: 3.4-5.6 ГГц</div>
+                        <div class="spec-item">TDP: 125 Вт</div>
+                    </div>
+                    <div class="product-price">39 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="lga1700">
+                    <div class="product-name">Intel Core i9-14900KS</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Ядра/потоки: 24/32 (8P+16E)</div>
+                        <div class="spec-item">Частота: 3.2-6.2 ГГц</div>
+                        <div class="spec-item">TDP: 150 Вт</div>
+                    </div>
+                    <div class="product-price">69 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Примеры материнских плат -->
+        <div id="mb-products" class="products-section window">
+            <div class="section-header">
+                <h2 class="section-title">Материнские платы</h2>
+            </div>
+            <div class="products-grid">
+                <!-- AM5 материнские платы -->
+                <div class="product-card" data-socket="am5" data-cpu-power="8+4" data-mb-brand="msi">
+                    <div class="product-name">MSI MAG B650 TOMAHAWK WIFI</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Питание процессора: 8+4 pin</div>
+                        <div class="spec-item">Чипсет: AMD B650</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                    </div>
+                    <div class="product-price">21 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="am5" data-cpu-power="8" data-mb-brand="asus">
+                    <div class="product-name">ASUS TUF GAMING B650-PLUS WIFI</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Питание процессора: 8 pin</div>
+                        <div class="spec-item">Чипсет: AMD B650</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                    </div>
+                    <div class="product-price">22 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="am5" data-cpu-power="8+4" data-mb-brand="gigabyte">
+                    <div class="product-name">Gigabyte B650 AORUS ELITE AX</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Питание процессора: 8+4 pin</div>
+                        <div class="spec-item">Чипсет: AMD B650</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: Gigabyte</div>
+                    </div>
+                    <div class="product-price">24 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="am5" data-cpu-power="8+4" data-mb-brand="asus">
+                    <div class="product-name">ASUS ROG STRIX B650-A GAMING WIFI</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Питание процессора: 8+4 pin</div>
+                        <div class="spec-item">Чипсет: AMD B650</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                    </div>
+                    <div class="product-price">26 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="am5" data-cpu-power="8+4" data-mb-brand="asrock">
+                    <div class="product-name">ASRock B650 Steel Legend</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: AM5</div>
+                        <div class="spec-item">Питание процессора: 8+4 pin</div>
+                        <div class="spec-item">Чипсет: AMD B650</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: ASRock</div>
+                    </div>
+                    <div class="product-price">20 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+
+                <!-- LGA 1700 материнские платы -->
+                <div class="product-card" data-socket="lga1700" data-cpu-power="8+4" data-mb-brand="msi">
+                    <div class="product-name">MSI MAG Z790 TOMAHAWK WIFI</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Питание процессора: 8+4 pin</div>
+                        <div class="spec-item">Чипсет: Intel Z790</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                    </div>
+                    <div class="product-price">28 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="lga1700" data-cpu-power="8+4" data-mb-brand="asus">
+                    <div class="product-name">ASUS TUF GAMING Z790-PLUS WIFI</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Питание процессора: 8+4 pin</div>
+                        <div class="spec-item">Чипсет: Intel Z790</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                    </div>
+                    <div class="product-price">29 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="lga1700" data-cpu-power="8+4" data-mb-brand="gigabyte">
+                    <div class="product-name">Gigabyte Z790 AORUS ELITE AX</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Питание процессора: 8+4 pin</div>
+                        <div class="spec-item">Чипсет: Intel Z790</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: Gigabyte</div>
+                    </div>
+                    <div class="product-price">31 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="lga1700" data-cpu-power="4+4" data-mb-brand="asus">
+                    <div class="product-name">ASUS PRIME B760-PLUS</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Питание процессора: 4+4 pin</div>
+                        <div class="spec-item">Чипсет: Intel B760</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                    </div>
+                    <div class="product-price">18 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-socket="lga1700" data-cpu-power="8" data-mb-brand="asrock">
+                    <div class="product-name">ASRock B760 Steel Legend</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Сокет: LGA 1700</div>
+                        <div class="spec-item">Питание процессора: 8 pin</div>
+                        <div class="spec-item">Чипсет: Intel B760</div>
+                        <div class="spec-item">Форм-фактор: ATX</div>
+                        <div class="spec-item">Производитель: ASRock</div>
+                    </div>
+                    <div class="product-price">19 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Примеры блоков питания -->
+        <div id="psu-products" class="products-section window">
+            <div class="section-header">
+                <h2 class="section-title">Блоки питания</h2>
+            </div>
+            <div class="products-grid">
+                <!-- БП 750W -->
+                <div class="product-card" data-connector="8+8" data-wattage="750" data-cpu-connector="8" data-psu-brand="msi">
+                    <div class="product-name">MSI MPG A750GF</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8+8 pin</div>
+                        <div class="spec-item">Подключение процессора: 8 pin</div>
+                        <div class="spec-item">Мощность: 750 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Gold</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                    </div>
+                    <div class="product-price">8 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-connector="8+8" data-wattage="750" data-cpu-connector="8+4" data-psu-brand="asus">
+                    <div class="product-name">ASUS TUF GAMING 750B</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8+8 pin</div>
+                        <div class="spec-item">Подключение процессора: 8+4 pin</div>
+                        <div class="spec-item">Мощность: 750 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Bronze</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                    </div>
+                    <div class="product-price">7 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-connector="8+8" data-wattage="750" data-cpu-connector="8" data-psu-brand="corsair">
+                    <div class="product-name">Corsair RM750x (2021)</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8+8 pin</div>
+                        <div class="spec-item">Подключение процессора: 8 pin</div>
+                        <div class="spec-item">Мощность: 750 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Gold</div>
+                        <div class="spec-item">Производитель: Corsair</div>
+                    </div>
+                    <div class="product-price">10 499 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-connector="8+8" data-wattage="750" data-cpu-connector="8+4" data-psu-brand="seasonic">
+                    <div class="product-name">Seasonic FOCUS GX-750</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8+8 pin</div>
+                        <div class="spec-item">Подключение процессора: 8+4 pin</div>
+                        <div class="spec-item">Мощность: 750 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Gold</div>
+                        <div class="spec-item">Производитель: Seasonic</div>
+                    </div>
+                    <div class="product-price">11 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+
+                <!-- БП 600W -->
+                <div class="product-card" data-connector="8" data-wattage="600" data-cpu-connector="4+4" data-psu-brand="msi">
+                    <div class="product-name">MSI MAG A600DN</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8 pin</div>
+                        <div class="spec-item">Подключение процессора: 4+4 pin</div>
+                        <div class="spec-item">Мощность: 600 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ White</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                    </div>
+                    <div class="product-price">5 499 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-connector="8" data-wattage="600" data-cpu-connector="4+4" data-psu-brand="asus">
+                    <div class="product-name">ASUS TUF GAMING 600B</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8 pin</div>
+                        <div class="spec-item">Подключение процессора: 4+4 pin</div>
+                        <div class="spec-item">Мощность: 600 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Bronze</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                    </div>
+                    <div class="product-price">6 299 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-connector="8" data-wattage="600" data-cpu-connector="4+4" data-psu-brand="corsair">
+                    <div class="product-name">Corsair CV650</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8 pin</div>
+                        <div class="spec-item">Подключение процессора: 4+4 pin</div>
+                        <div class="spec-item">Мощность: 650 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Bronze</div>
+                        <div class="spec-item">Производитель: Corsair</div>
+                    </div>
+                    <div class="product-price">6 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+
+                <!-- БП 850W -->
+                <div class="product-card" data-connector="12vhpwp" data-wattage="850" data-cpu-connector="8+4" data-psu-brand="msi">
+                    <div class="product-name">MSI MPG A850G PCIE5</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 12VHPWP</div>
+                        <div class="spec-item">Подключение процессора: 8+4 pin</div>
+                        <div class="spec-item">Мощность: 850 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Gold</div>
+                        <div class="spec-item">Производитель: MSI</div>
+                    </div>
+                    <div class="product-price">14 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-connector="8+8" data-wattage="850" data-cpu-connector="8+4" data-psu-brand="asus">
+                    <div class="product-name">ASUS ROG STRIX 850G</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8+8 pin</div>
+                        <div class="spec-item">Подключение процессора: 8+4 pin</div>
+                        <div class="spec-item">Мощность: 850 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Gold</div>
+                        <div class="spec-item">Производитель: ASUS</div>
+                    </div>
+                    <div class="product-price">15 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+                <div class="product-card" data-connector="8+8" data-wattage="850" data-cpu-connector="8+4" data-psu-brand="seasonic">
+                    <div class="product-name">Seasonic PRIME GX-850</div>
+                    <div class="product-specs">
+                        <div class="spec-item">Подключение видеокарты: 8+8 pin</div>
+                        <div class="spec-item">Подключение процессора: 8+4 pin</div>
+                        <div class="spec-item">Мощность: 850 Вт</div>
+                        <div class="spec-item">Сертификация: 80+ Gold</div>
+                        <div class="spec-item">Производитель: Seasonic</div>
+                    </div>
+                    <div class="product-price">16 999 ₽</div>
+                    <button class="add-button">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <footer>
+            <div class="container">
+                <p>Черновой набросок сайта для ОПД.</p>
+                <p>Над проектом работали Шуряшкина Я. А. и Иванов Д. О.</p>
+                <p>Copyright © 2024 ArkusPin. Все права защищены.</p>
+            </div>
+        </footer>
+	<script src="script.js"></script>
+</body>
+</html>
